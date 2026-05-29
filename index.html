@@ -14,7 +14,9 @@
       --accent2: #059669;
       --text: #111827;
       --muted: #6b7280;
-      --tag-bg: #eff6ff;
+      /* 하늘색 테마 설정 */
+      --box-bg: #f0f7ff;
+      --box-border: #bfdbfe;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -22,56 +24,36 @@
 
     /* 이미지 스타일 */
     .hero-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px;
+      margin-bottom: 2rem; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     }
 
     /* NAV */
     nav {
-      position: sticky; top: 0; z-index: 99;
-      background: rgba(255,255,255,.9); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: .9rem 2rem;
+      position: sticky; top: 0; z-index: 99; background: rgba(255,255,255,.9);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; padding: .9rem 2rem;
     }
     .nav-name { font-family: 'DM Mono', monospace; font-size: .9rem; color: var(--accent2); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--muted); text-decoration: none; }
 
-    /* LAYOUT */
+    /* 레이아웃 */
     .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
-
-    /* HERO */
-    .hero-container { max-width: 860px; margin: 0 auto; padding: 6rem 1.5rem 4rem; }
-    .hero-badge { font-family: 'DM Mono', monospace; font-size: .72rem; color: var(--accent2); letter-spacing: .15em; margin-bottom: 1rem; display: block; }
-    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.2; margin-bottom: .75rem; }
-    .hero h1 span { color: var(--accent); }
-    .hero-sub { font-family: 'DM Mono', monospace; font-size: .9rem; color: var(--muted); margin-bottom: 1.25rem; }
-    .hero-desc { font-size: .95rem; color: var(--muted); margin-bottom: 2rem; }
-    
-    /* SECTION & CARD */
     section { padding: 4rem 0; border-top: 1px solid var(--border); }
-    .sec-label { font-family: 'DM Mono', monospace; font-size: .68rem; color: var(--accent2); letter-spacing: .2em; margin-bottom: .5rem; }
-    .sec-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; }
+    
+    /* 하늘색 상자 스타일 (핵심 수정) */
+    .content-box {
+      background: var(--box-bg);
+      border: 1px solid var(--box-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .box-title { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600; }
 
-    /* ABOUT GRID */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .about-cell { background: var(--card); padding: 1.4rem 1.6rem; }
-    .cell-label { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--accent); letter-spacing: .12em; margin-bottom: .6rem; }
-    .about-cell p, .about-cell ul { font-size: .88rem; color: var(--text); line-height: 1.85; }
-
-    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.on { opacity: 1; transform: none; }
-
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -90,7 +72,7 @@
 <div class="hero-container">
   <div class="hero">
     <span class="hero-badge">// AI ENGINEERING PORTFOLIO</span>
-    <h1>안녕하세요,<br/><span>윤준식</span>입니다.</h1>
+    <h1><span>junsik portfolio</span></h1>
     <p class="hero-sub">Artificial Intelligence Engineering Student @ 조선대학교</p> 
     <p class="hero-desc">
       인공지능공학을 전공하며 의료 AI 및 재활치료 보조 시스템 개발에 깊은 관심을 두고 있습니다. 
@@ -198,15 +180,11 @@
     <div class="edu-meta">
       <div class="meta-item">
         <div class="m-label">YEAR</div>
-        <div class="m-val">2nd Year</div> 
+        <div class="m-val">2nd Year 재학</div> 
       </div>
       <div class="meta-item">
         <div class="m-label">PERIOD</div>
-        <div class="m-val">2023. 03 — Present</div> 
-      </div>
-      <div class="meta-item">
-        <div class="m-label">DEGREE</div>
-        <div class="m-val">B.E. (재학 중)</div>
+        <div class="m-val">2023. 03</div> 
       </div>
     </div>
     <div class="cell-label" style="margin-bottom:.6rem;">Relevant Coursework</div>
