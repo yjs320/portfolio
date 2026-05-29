@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>포트폴리오 | AI Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #21262d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --tag-bg: #1f3a5f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; font-weight: 300; line-height: 1.8; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 99;
+      background: rgba(13,17,23,.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .9rem 2rem;
+    }
+    .nav-name { font-family: 'DM Mono', monospace; font-size: .9rem; color: var(--accent2); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* LAYOUT */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* HERO */
+    .hero-container {
+      max-width: 860px; margin: 0 auto; padding: 6rem 1.5rem 4rem;
+      display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;
+    }
+    .hero-badge {
+      font-family: 'DM Mono', monospace; font-size: .72rem;
+      color: var(--accent2); letter-spacing: .15em;
+      margin-bottom: 1rem; display: block;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.2; margin-bottom: .75rem; }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub { font-family: 'DM Mono', monospace; font-size: .9rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .hero-desc { font-size: .95rem; color: var(--muted); margin-bottom: 2rem; }
+    .hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      font-family: 'DM Mono', monospace; font-size: .75rem; padding: .6rem 1.4rem;
+      border-radius: 6px; text-decoration: none; transition: all .2s;
+    }
+    .btn-primary { background: var(--accent); color: #0d1117; font-weight: 500; }
+    .btn-primary:hover { background: #79c0ff; }
+
+    /* SECTION */
+    section { padding: 4rem 0; border-top: 1px solid var(--border); }
+    .sec-label { font-family: 'DM Mono', monospace; font-size: .68rem; color: var(--accent2); letter-spacing: .2em; margin-bottom: .5rem; }
+    .sec-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem; }
+
+    /* CARD */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.75rem;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: var(--accent); }
+
+    /* ABOUT GRID */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .about-cell { background: var(--card); padding: 1.4rem 1.6rem; }
+    .about-cell:hover { background: #1c2230; }
+    .cell-label { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--accent); letter-spacing: .12em; margin-bottom: .6rem; }
+    .about-cell p, .about-cell ul { font-size: .88rem; color: var(--muted); line-height: 1.85; }
+    .about-cell ul { padding-left: 1.1rem; }
+
+    /* EDUCATION */
+    .edu-header { margin-bottom: 1.25rem; }
+    .edu-uni { font-size: 1.3rem; font-weight: 700; margin-bottom: .2rem; }
+    .edu-dept { font-family: 'DM Mono', monospace; font-size: .8rem; color: var(--accent); }
+    .edu-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0 1.25rem; }
+    .meta-item .m-label { font-family: 'DM Mono', monospace; font-size: .6rem; color: var(--muted); letter-spacing: .1em; }
+    .meta-item .m-val { font-family: 'DM Mono', monospace; font-size: .82rem; color: var(--text); }
+    .course-wrap { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+    .chip { font-family: 'DM Mono', monospace; font-size: .67rem; padding: .25rem .65rem; background: var(--tag-bg); border-radius: 4px; color: var(--accent); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .contact-item { background: var(--card); padding: 1.25rem 1.4rem; }
+    .contact-item:hover { background: #1c2230; }
+    .c-label { font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--muted); letter-spacing: .12em; margin-bottom: .35rem; }
+    .contact-item a { font-family: 'DM Mono', monospace; font-size: .78rem; color: var(--text); text-decoration: none; word-break: break-all; }
+    .contact-item a:hover { color: var(--accent); }
+
+    /* CAREER */
+    .goal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 1rem; }
+    .goal-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem; text-align: center; transition: border-color .2s; }
+    .goal-card:hover { border-color: var(--accent2); }
+    .g-icon { font-size: 1.6rem; margin-bottom: .6rem; }
+    .g-title { font-family: 'DM Mono', monospace; font-size: .78rem; color: var(--text); margin-bottom: .35rem; }
+    .g-desc { font-size: .75rem; color: var(--muted); line-height: 1.6; }
+
+    /* REFERENCE */
+    .ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .75rem; }
+    .ref-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; }
+    .ref-name { font-size: .85rem; font-weight: 500; margin-bottom: .2rem; }
+    .ref-type { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--accent); margin-bottom: .3rem; }
+    .ref-card a { font-family: 'DM Mono', monospace; font-size: .68rem; color: var(--muted); text-decoration: none; }
+    .ref-card a:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--muted); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .hero-container { text-align: center; padding: 4rem 1.5rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">[ yjs320.portfolio ]</span>
+  <ul class="nav-links">
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#about">about</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#career">career goal</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero-container">
+  <div class="hero">
+    <span class="hero-badge">// AI ENGINEERING PORTFOLIO</span>
+    <h1>안녕하세요,<br/><span>윤준식</span>입니다.</h1>
+    <p class="hero-sub">Artificial Intelligence Engineering Student @ 조선대학교</p> 
+    <p class="hero-desc">
+      인공지능공학을 전공하며 의료 AI 및 재활치료 보조 시스템 개발에 깊은 관심을 두고 있습니다. 
+      향후 물리치료학 복수전공을 통해 도메인 지식을 확장하고, 이를 실제 현장에 적용할 수 있는 AI 구현 역량을 쌓는 것을 목표로 하고 있습니다.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">연락하기 →</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section id="reference">
+  <div class="sec-label">REFERENCE</div>
+  <div class="sec-title">참고한 AI · CS GitHub Pages 목록</div>
+  <div class="ref-grid reveal">
+    <div class="ref-card">
+      <div class="ref-name">Nikhil Chowdary Paleti</div>
+      <div class="ref-type">AI Engineer & Researcher · UC San Diego</div>
+      <a href="https://nikhil-paleti.github.io/" target="_blank">nikhil-paleti.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">Marcus Mayo</div>
+      <div class="ref-type">ML Engineering · MLOps 특화 포트폴리오</div>
+      <a href="https://marcusmayo.github.io/machine-learning-portfolio/" target="_blank">marcusmayo.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">Jyotin Goel</div>
+      <div class="ref-type">ML Researcher · NLP & AI Systems</div>
+      <a href="https://gjyotin305.github.io/" target="_blank">gjyotin305.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">Anas Fikri Hanif</div>
+      <div class="ref-type">AI Engineer & Data Scientist</div>
+      <a href="https://anashaneef.github.io/" target="_blank">anashaneef.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">Chris Tran</div>
+      <div class="ref-type">NLP Research · Minimal Portfolio 스타일</div>
+      <a href="https://chriskhanhtran.github.io/minimal-portfolio/" target="_blank">chriskhanhtran.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">chashmishcoder</div>
+      <div class="ref-type">ML Engineer · Neural Network 애니메이션</div>
+      <a href="https://chashmishcoder.github.io/" target="_blank">chashmishcoder.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">David T. Farr</div>
+      <div class="ref-type">ML Researcher · PhD UW</div>
+      <a href="https://davidthfarr.github.io/" target="_blank">davidthfarr.github.io →</a>
+    </div>
+    <div class="ref-card">
+      <div class="ref-name">emmabostian / developer-portfolios</div>
+      <div class="ref-type">AI/CS 개발자 포트폴리오 큐레이션 목록</div>
+      <a href="https://github.com/emmabostian/developer-portfolios" target="_blank">github.com/emmabostian →</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-label">ABOUT ME</div>
+  <div class="sec-title">About Me</div>
+  <div class="about-grid reveal">
+    <div class="about-cell">
+      <div class="cell-label">// 전공</div>
+      <p>인공지능공학부</p>
+    </div>
+    <div class="about-cell">
+      <div class="cell-label">// 관심 분야</div>
+      <ul>
+        <li>Medical AI / Computer Vision</li>
+        <li>재활치료 보조 시스템 및 헬스케어</li>
+        <li>Deep Learning (신체 골격 추정)</li>
+      </ul>
+    </div>
+    <div class="about-cell">
+      <div class="cell-label">// 진로 목표</div>
+      <p>물리치료 도메인 지식을 접목하여, 실제 의료 및 스포츠 재활 현장에서 활용 가능한 딥러닝 기반 자세 분석 및 보조 시스템 엔지니어가 되는 것입니다.</p>
+    </div>
+    <div class="about-cell">
+      <div class="cell-label">// 현재 학습 중인 기술</div>
+      <ul>
+        <li>Python (PyTorch / scikit-learn)</li>
+        <li>Linux (Ubuntu / WSL) 및 Docker 인프라</li>
+        <li>C / C++ 및 데이터 구조</li>
+      </ul>
+    </div>
+    <div class="about-cell" style="grid-column: 1 / -1;">
+      <div class="cell-label">// AI 분야 관심 주제</div>
+      <p>재활치료 동작 인식을 위한 Computer Vision, 의료 영상 분석, 환자 모니터링 AI 시스템에 관심이 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="sec-label">EDUCATION</div>
+  <div class="sec-title">Education</div>
+  <div class="card reveal">
+    <div class="edu-header">
+      <div class="edu-uni">Chosun University</div>
+      <div class="edu-dept">// Department of Artificial Intelligence Engineering</div>
+    </div>
+    <div class="edu-meta">
+      <div class="meta-item">
+        <div class="m-label">YEAR</div>
+        <div class="m-val">2nd Year</div> 
+      </div>
+      <div class="meta-item">
+        <div class="m-label">PERIOD</div>
+        <div class="m-val">2023. 03 — Present</div> 
+      </div>
+      <div class="meta-item">
+        <div class="m-label">DEGREE</div>
+        <div class="m-val">B.E. (재학 중)</div>
+      </div>
+    </div>
+    <div class="cell-label" style="margin-bottom:.6rem;">Relevant Coursework</div>
+    <div class="course-wrap">
+      <span class="chip">Machine Learning</span>
+      <span class="chip">AI Signals & Systems</span>
+      <span class="chip">Open Source Software</span>
+      <span class="chip">Python Programming</span>
+      <span class="chip">C / C++ Programming</span>
+      <span class="chip">Data Structures</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-label">SKILLS</div>
+  <div class="sec-title">Skills</div>
+  <div class="card reveal" id="skills-wrap">
+    <div class="about-grid" style="grid-template-columns: 1fr; background: transparent; padding: 0;">
+      
+      <div class="about-cell" style="border: none; padding-bottom: 1.2rem;">
+        <div class="cell-label" style="font-size: .85rem; letter-spacing: 0.1em; color: var(--accent);">// PROGRAMMING</div>
+        <ul style="list-style: none; padding-left: 0; margin-top: .5rem;">
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">Python</span> : <span style="color: var(--accent2);">Intermediate</span>
+          </li>
+          <li style="margin-bottom: 0; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">C / C++</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about-cell" style="border: none; border-top: 1px solid var(--border); padding-top: 1.2rem; padding-bottom: 1.2rem;">
+        <div class="cell-label" style="font-size: .85rem; letter-spacing: 0.1em; color: var(--accent);">// AI / ML</div>
+        <ul style="list-style: none; padding-left: 0; margin-top: .5rem;">
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">PyTorch</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">scikit-learn</span> : <span style="color: var(--accent2);">Intermediate</span>
+          </li>
+          <li style="margin-bottom: 0; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">Numpy / Pandas</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="about-cell" style="border: none; border-top: 1px solid var(--border); padding-top: 1.2rem; padding-bottom: 1.2rem;">
+        <div class="cell-label" style="font-size: .85rem; letter-spacing: 0.1em; color: var(--accent);">// WEB</div>
+        <ul style="list-style: none; padding-left: 0; margin-top: .5rem;">
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">HTML / CSS</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+          <li style="margin-bottom: 0; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">React</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about-cell" style="border: none; border-top: 1px solid var(--border); padding-top: 1.2rem; margin-bottom: 0; padding-bottom: 0;">
+        <div class="cell-label" style="font-size: .85rem; letter-spacing: 0.1em; color: var(--accent);">// TOOLS</div>
+        <ul style="list-style: none; padding-left: 0; margin-top: .5rem;">
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">Git / GitHub</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+          <li style="margin-bottom: .4rem; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">VS Code</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+          <li style="margin-bottom: 0; font-family: 'DM Mono', monospace; font-size: .95rem; color: var(--text);">
+            <span style="font-weight: 600;">Docker</span> : <span style="color: var(--muted);">basic</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="sec-label">CAREER GOAL</div>
+  <div class="sec-title">Career Goal / Future Plan</div>
+  <div class="goal-grid reveal">
+    <div class="goal-card">
+      <div class="g-icon">🏥</div>
+      <div class="g-title">Medical AI Researcher</div>
+      <div class="g-desc">의료 영상 및 환자 데이터를 분석하는 AI 연구자</div> 
+    </div>
+    <div class="goal-card">
+      <div class="g-icon">👁️</div>
+      <div class="g-title">Computer Vision Engineer</div>
+      <div class="g-desc">실시간 신체 골격 추정 및 동작 인식 전문 엔지니어</div> 
+    </div>
+    <div class="goal-card">
+      <div class="g-icon">🏃</div>
+      <div class="g-title">Sports Rehabilitation AI</div>
+      <div class="g-desc">부상 방지 및 자세 교정을 위한 헬스케어 시스템 개발</div> 
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-label">CONTACT</div>
+  <div class="sec-title">Contact</div>
+  <div class="contact-grid reveal">
+    <div class="contact-item">
+      <div class="c-label">EMAIL</div>
+      <a href="mailto:yjs30284487@gmail.com">yjs30284487@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <div class="c-label">GITHUB</div>
+      <a href="https://github.com/yjs320" target="_blank">github.com/yjs320</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Junsik Yoon · AI Engineering · Chosun University</p> 
+  <p style="margin-top:.4rem; font-size: .8rem; color: var(--muted);">Built with HTML/CSS · Hosted on <a href="https://pages.github.com" style="color:var(--accent);text-decoration:none;" target="_blank">GitHub Pages</a></p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
