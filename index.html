@@ -18,10 +18,6 @@
     body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; padding: 2rem; }
     .container { max-width: 800px; margin: 0 auto; }
 
-    /* 표지 이미지 추가 */
-    .hero-image { width: 100%; border-radius: 16px; margin-bottom: 2rem; }
-
-    /* 상자 디자인 공통 스타일 */
     .content-box {
       background: var(--box-bg);
       border: 1px solid var(--box-border);
@@ -32,31 +28,49 @@
     .sec-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
     .sec-label { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; }
 
-    /* 기존 스타일 유지 */
-    .hero { text-align: center; margin-bottom: 4rem; }
-    .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; color: var(--muted); }
+    .hero-wrapper {
+      position: relative;
+      background-image: url('image_d5ade3.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+      padding: 4rem 2rem;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; color: white; }
+    .hero-content p { font-size: 1.2rem; color: white; }
+
     .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
     .reveal.on { opacity: 1; transform: translateY(0); }
-    
     .chip { display: inline-block; background: #e0f2fe; padding: 0.2rem 0.6rem; border-radius: 6px; margin: 0.2rem; font-size: 0.9rem; color: var(--accent); }
     .goal-card { background: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid var(--box-border); }
     .c-label { font-size: 0.7rem; font-weight: bold; color: var(--accent); }
   </style>
 </head>
+  
 <body>
-
 <div class="container">
   
-  <!-- 표지 영역 (이미지 및 소개글 포함) -->
-  <section class="hero">
-    <!-- image_f16503.png 추가 -->
-    <img src="image_f16503.png" alt="Rehabilitation AI" class="hero-image" style="border: 2px solid var(--box-border);">
-    <h1>junsik portfolio</h1>
-    <p>의료 AI 및 재활치료 보조 시스템 개발에 관심을 두고 있으며,
-      기술과 현장의 간극을 줄이기 위해 물리치료학 복수전공을 준비하고 있습니다. </p>
+  <section class="hero-wrapper">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>junsik portfolio</h1>
+      <p>의료 AI 및 재활치료 보조 시스템 개발에 관심을 두고 있으며,<br>
+      기술과 현장의 간극을 줄이기 위해 물리치료학 복수전공을 준비하고 있습니다.</p>
+    </div>
   </section>
-<hr style="border: 0; border-top: 2px solid #e5e7eb; margin: 3rem 0;">
+
+  <hr style="border: 0; border-top: 2px solid #e5e7eb; margin: 3rem 0;">
 
   <section id="about" class="content-box reveal">
     <div class="sec-label">ABOUT ME</div>
